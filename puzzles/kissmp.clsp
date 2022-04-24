@@ -1,0 +1,88 @@
+
+(mod (
+		BUYER_PUBKEY
+		SELLER_PUBKEY
+		BUYER_PUZZLEHASH
+		SELLER_PUZZLEHASH
+		PRICE_KMOJOS  ;price in Kmojos, 1000mojos == 1 kmojos
+		spend_pubkey
+		my_amount	;in mojos
+		new_amount	;in mojos
+		my_puzzlehash
+	)
+
+	(include condition_codes.clib)
+
+;	penalty_amount: 05% of price
+;	backup_amount:	25% of price
+;	seller_amount:	25% + 5%
+;	buyer_amount:	100% + 25%
+;	total_amount:	100% + 25% + 25% + 5%
+
+	(defun-inline penalty_amount	() (* PRICE_KMOJOS   50))
+	(defun-inline backup_amount		() (* PRICE_KMOJOS  250))
+	(defun-inline price_amount		() (* PRICE_KMOJOS 1000))
+	(defun-inline total_amount		() (+ (price_amount) (* 2 (backup_amount)) (penalty_amount)))
+
+	;main
+	(if (not (any (= SELLER_PUBKEY spend_pubkey)(= BUYER_PUBKEY spend_pubkey)))
+		;(x "wrong spend_pubkey")
+		(x "code00")
+		(if (= BUYER_PUBKEY spend_pubkey)
+			;;;;;;;;;;;;;;;;;
+			;buyer's stuff
+			;;;;;;;;;;;;;;;;;
+			(if (all (not (= 0 new_amount))(> my_amount 0))		; not need for this part, I guess
+				;(x "new_amount != 0 || my_amount == 0")
+				(x "code01")
+				(if (not (= (total_amount) my_amount))
+					;get his money back
+					(list
+						(list CREATE_COIN BUYER_PUZZLEHASH my_amount)
+
+						(list ASSERT_MY_AMOUNT my_amount)
+						(list CREATE_COIN_ANNOUNCEMENT (sha256 new_amount))
+						(list AGG_SIG_ME BUYER_PUBKEY (sha256 new_amount))
+					)
+					;release payment
+					(list
+						(list CREATE_COIN BUYER_PUZZLEHASH (backup_amount))
+						(list CREATE_COIN SELLER_PUZZLEHASH (+ (price_amount)(backup_amount)(penalty_amount)))
+
+						(list ASSERT_MY_AMOUNT my_amount)
+						(list CREATE_COIN_ANNOUNCEMENT (sha256 new_amount))
+						(list AGG_SIG_ME BUYER_PUBKEY (sha256 new_amount))
+					)
+				)
+			)
+			;;;;;;;;;;;;;;;;;
+			;seller's stuff
+			;;;;;;;;;;;;;;;;;
+			(if (not (any (all (= (total_amount) new_amount)(= (+ (price_amount)(backup_amount)) my_amount))(all (= 0 new_amount)(= (total_amount) my_amount))))
+				;(x "wrong new_amount or my_amount")
+				(x "code02")
+
+				(if (all (= 0 new_amount)(= (total_amount) my_amount))
+					;unlock buyer's money
+					(list
+						(list CREATE_COIN BUYER_PUZZLEHASH (+ (price_amount)(backup_amount)(penalty_amount)))
+						(list CREATE_COIN SELLER_PUZZLEHASH (backup_amount))
+
+						(list ASSERT_MY_AMOUNT my_amount)
+						(list CREATE_COIN_ANNOUNCEMENT (sha256 new_amount))
+						(list AGG_SIG_ME SELLER_PUBKEY (sha256 new_amount))
+					)
+					;add extra money
+					(list
+						(list CREATE_COIN my_puzzlehash new_amount)
+
+						(list ASSERT_MY_AMOUNT my_amount)
+						(list ASSERT_MY_PUZZLEHASH my_puzzlehash)
+						(list CREATE_COIN_ANNOUNCEMENT (sha256 new_amount))
+						(list AGG_SIG_ME SELLER_PUBKEY (sha256 new_amount))
+					)
+				)
+			)
+		)
+	)
+)

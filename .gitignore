@@ -1,0 +1,9 @@
+venv
+kissmp.egg-info
+.eggs
+__pycache__
+main.sym
+*.payment
+*.bak
+notes
+build

@@ -1,0 +1,26 @@
+
+(mod (
+		POSITIVE_REVIEW	;bool
+		REVIEW_PUBKEY	;buyer/seller cupkey
+		my_amount		;in mojos
+	)
+
+	(include condition_codes.clib)
+
+	;coffee's wallet treasury reserve puzzlehash
+	(defconstant TWATS_TREASURY_PUZZLEHASH 0xb0a912013c049420b080ed440d3fc3d5f9568fc79ae52328b2a55e9223ecc22c)
+	(defconstant STATIC_AMOUNT 2000000000)
+
+	;main
+	(if (> STATIC_AMOUNT my_amount)
+		;(x "too low amount")
+		(x "code00")
+		;allow spending
+		(list
+			(list CREATE_COIN TWATS_TREASURY_PUZZLEHASH my_amount)
+			(list ASSERT_MY_AMOUNT my_amount)
+			(list CREATE_COIN_ANNOUNCEMENT (sha256 my_amount))
+			(list CREATE_PUZZLE_ANNOUNCEMENT (sha256 my_amount))
+		)
+	)
+)
