@@ -4,7 +4,7 @@ kissmp
 Install
 -------
 
-**Ubuntu/MacOSs/Debian**
+**Ubuntu/Debian/MacOSs**
 ```
 git clone https://github.com/sometwit/kissmp.git
 cd kissmp
