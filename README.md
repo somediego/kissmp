@@ -4,7 +4,7 @@ kissmp
 Install
 -------
 
-**Ubuntu/MacOSs**
+**Ubuntu/MacOSs/Debian**
 ```
 git clone https://github.com/sometwit/kissmp.git
 cd kissmp
@@ -25,4 +25,11 @@ python -m pip install --upgrade pip setuptools wheel
 pip install .
 ```
 
-Lastly this requires a synced, running light wallet
+Lastly this requires a synced, running light wallet.
+
+
+
+Where to buy/sell
+-------
+
+https://kissmy.parts
