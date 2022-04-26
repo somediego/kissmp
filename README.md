@@ -29,7 +29,11 @@ Lastly this requires a synced, running light wallet.
 
 
 
+How it works
+-------
+https://kissmy.parts/?page_id=2
+
+
 Where to buy/sell
 -------
-
 https://kissmy.parts

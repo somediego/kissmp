@@ -132,11 +132,11 @@ def final_step_seller_cancel(
         payment_coin: Coin,
         verbosity: bool,
     ):
-    confirmation = input("Did you deliver your part of the trade? (Y/N)") in ["y", "Y", "yes", "Yes"]
-    if confirmation:
-        print(f"Then you must wait for buyer to confirm. And %.12f XCH will appear in your wallet." % (float(amount['old'] - amount['deposit'])/ TRILLION))
-        return
-    print(f"\nAs seller, you will pay a penalty to buyer of %.12f XCH for locking his money without delivering." % (float(amount['penalty'])/ TRILLION))
+    #confirmation = input("Did you deliver your part of the trade? (Y/N)") in ["y", "Y", "yes", "Yes"]
+    #if confirmation:
+    #    print(f"Then you must wait for buyer to confirm. And %.12f XCH will appear in your wallet." % (float(amount['old'] - amount['deposit'])/ TRILLION))
+    #    return
+    print(f"As seller, you will pay a penalty to buyer of %.12f XCH for locking his money without delivering." % (float(amount['penalty'])/ TRILLION))
     print_final_bundle(final_bundle, amount['fee'], verbosity)
     print(f"buyer's  amount to unlock: %.12f XCH" % (float(amount['old'] - amount['deposit']) / TRILLION))
     print(f"Get back our deposit amount: %.12f XCH" % (float(amount['deposit']) / TRILLION))

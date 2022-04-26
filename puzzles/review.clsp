@@ -8,7 +8,7 @@
 	(include condition_codes.clib)
 
 	;coffee's wallet treasury reserve puzzlehash
-	(defconstant TWATS_TREASURY_PUZZLEHASH 0xb0a912013c049420b080ed440d3fc3d5f9568fc79ae52328b2a55e9223ecc22c)
+	(defconstant TWATS_TREASURY_PUZZLEHASH 0x837add94046d2a16efafab120d0a62082f05b9fd791cae479adfe98e9a9ef49e)
 	(defconstant STATIC_AMOUNT 2000000000)
 
 	;main

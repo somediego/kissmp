@@ -103,15 +103,16 @@ def show_review_info(cupkey: str, verbosity: bool):
     print(f"positive_stars: {positive_stars}")
     print(f"negative_stars: {negative_stars}")
     if   positive_stars == 0 and negative_stars == 0:
-        #print(f"No need for trust, choose a small price to start with.")
         #print(f"No trust in need, small price indeed.")
-        print(f"No need for trust in here, just avoid big amounts.")
+        #print(f"No need for trust in here, just avoid big amounts.")
+        print(f"We can be heroes.")
     elif positive_stars >  0 and negative_stars == 0:
         print(f"I've seen better.")
     elif positive_stars == 0 and negative_stars >  0:
         print(f"What can I say.")
     elif positive_stars == negative_stars:
-        print(f"50/50, to do, or not to do.")
+        #print(f"50/50, to do, or not to do.")
+        print(f"Welcome to the jungle.")
     else:
         print("%.2f%% of a character, it seems." % (100 * negative_stars / (negative_stars + positive_stars)))
 
