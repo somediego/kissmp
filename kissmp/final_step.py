@@ -48,7 +48,7 @@ def check_this_is_mainnet():
 
 def message_on_confirm(coin_name):
     print(f"Sending to network, in progress.")
-    print(f"Transaction shoud appear at https://chia.tt/info/coin/0x{coin_name}")
+    print(f"After 20 block confirmations, transaction should appear at https://chia.tt/info/coin/0x{coin_name}")
     check_this_is_mainnet()
 
 
