@@ -1,5 +1,11 @@
-kissmp
+Kiss My Parts
 =======
+
+Decentralized escrow. 
+
+Exchange anything. No middle man. No KYC. Open source. 
+
+Built for [Chia](https://www.chia.net/) in [Chialisp](https://chialisp.com/).
 
 Install
 -------
