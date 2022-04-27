@@ -187,7 +187,7 @@ def final_step_submit_review(
         verbosity: bool,
     ):
     print_final_bundle(final_bundle, amount['fee'], verbosity)
-    print(f"twats treasury reserve contribution: %.12f XCH" % (float(amount['treasury']) / TRILLION))
+    print(f"twat people treasury reserve alcoholic contribution: %.12f XCH" % (float(amount['treasury']) / TRILLION))
     confirmation= get_confirmation(final_bundle, fingerprint, verbosity)
     future_coin_name= review_coin.name()
     if verbosity:
