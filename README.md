@@ -38,14 +38,12 @@ Requires synced, running light wallet.
 
 **Ubuntu/Debian/MacOSs**
 ```
-cd kissmp
 . ./venv/bin/activate
 kissmp
 ```
 
 **Windows Powershell**
 ```
-cd kissmp
 ./venv/Scripts/activate
 kissmp
 ```
