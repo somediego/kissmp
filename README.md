@@ -64,3 +64,8 @@ Where to buy or sell
 Anywhere that accepts XCH.
 You can start here:
 https://kissmy.parts
+
+
+Others
+-------
+Thanks to Quexington and Kronus91, I learnt most of the chia stuff reading through their opensource projects.
