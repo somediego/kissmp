@@ -30,7 +30,6 @@ def choose_wallet_fingerprint( verbosity: bool= False) -> int:
             selection = 1
         selection -= 1
     if verbosity:
-        #print(f"selection: {selection+1}")
         print(f"selected fingerprint: {fingerprints[selection]}")
     return fingerprints[selection]
 
@@ -45,7 +44,6 @@ def get_and_save_wallet_keys(
     # keys
     fingerprint = choose_wallet_fingerprint(verbosity)
     sk1= PrivateKey.from_bytes(hexstr_to_bytes(get_private_key(fingerprint)['sk']))
-#    print(f"sk1: {sk1}, type: {type(sk1)}")
     wallet_sk1 = master_sk_to_wallet_sk(sk1, index_to_use)  # sk & index
     synth_wallet_sk1 = calculate_synthetic_secret_key(wallet_sk1, DEFAULT_HIDDEN_PUZZLE_HASH)
     # save it

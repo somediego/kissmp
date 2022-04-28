@@ -123,10 +123,6 @@ def seller_confirm(
         secret_key_store,
         verbosity,
     )
-    # testing #############  ##########   #########
-#    amount['contribution']= 999999981299
-    # ####### #############  ##########   #########
-
     # contribution bundle
     contribution_spendbundle= contribution_spendbundle_for_seller_to_lock(
         file,

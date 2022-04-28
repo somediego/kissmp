@@ -6,7 +6,7 @@ from datetime import datetime
 from chia.types.spend_bundle import Coin
 from chia.wallet.puzzles.p2_delegated_puzzle_or_hidden_puzzle import puzzle_for_synthetic_public_key
 
-
+from kissmp.amounts import BILLION, TRILLION
 
 
 def get_payment_data(payment_file: str, verbosity: bool= False):
@@ -35,7 +35,7 @@ def get_payment_data(payment_file: str, verbosity: bool= False):
                 continue
             d[str(key)] = str(val)[:-1]
             if 'XCH' in str(val):
-                d[str(key)] = int(float(val[:-4]) * 1000000000)
+                d[str(key)] = int(float(val[:-4]) * BILLION)
     if verbosity:
         print(f"file_data: {json.dumps(d, indent=4)}")
     return d
@@ -62,13 +62,13 @@ def create_payment_file(
     f.write('Payment Coin ID    : 0x{0}\n'.format(payment_coin.name()))
     f.write('Payment Coin PH    : 0x{0}\n'.format(payment_coin.puzzle_hash))
     f.write('Payment Coin Parent: 0x{0}\n'.format(payment_coin.parent_coin_info))
-    f.write("Price: %.9f XCH\n" % (amount['price_kmojos']/1000000000))
+    f.write("Price: %.9f XCH\n" % (amount['price_kmojos'] / BILLION))
     f.write('Buyer\'s  cupkey: 0x{0}\n'.format(buyer_cupkey))
     f.write('Seller\'s cupkey: 0x{0}\n'.format(seller_cupkey))
     f.write('Buyer\'s  cash out ph: 0x{0}\n'.format(puzzle_for_synthetic_public_key(buyer_cupkey).get_tree_hash()))
     f.write('Seller\'s cash out ph: 0x{0}\n'.format(puzzle_for_synthetic_public_key(seller_cupkey).get_tree_hash()))
-    f.write("Buyer's  amount to lock   : %.12f XCH\n" % (float(amount['buyer_amount']) / 1000000000000))
-    f.write("Seller's amount to deposit: %.12f XCH\n" % (float(amount['seller_amount']) / 1000000000000))
+    f.write("Buyer's  amount to lock   : %.12f XCH\n" % (float(amount['buyer_amount']) / TRILLION))
+    f.write("Seller's amount to deposit: %.12f XCH\n" % (float(amount['seller_amount']) / TRILLION))
     f.write('Date: ' + x.strftime('%y-%m-%d' + '\n'))
     f.write('##############################################################\nYour Notes:\n-Write in this section whatever you want.\n')
     f.close()
