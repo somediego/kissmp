@@ -26,19 +26,19 @@ setup(
     install_requires=dependencies,
     url="https://github.com/sometwit/kissmp",
     license="https://opensource.org/licenses/GPL-3.0",
-    description="I would love to know that too.",
+    description="Decentralized escrow using XCH, Chia coin.",
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
-        "License :: OSI Approved :: Apache Software License",
+	"License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Topic :: Security :: Cryptography",
     ],
     extras_require=dict(
         dev=dev_dependencies,
     ),
     project_urls={
-#        "Bug Reports": "https://github.com/don'tfuckingknowyet..",
+        "Bug Reports": "https://github.com/sometwit/kissmp",
         "Source": "https://github.com/sometwit/kissmp",
     },
 )
