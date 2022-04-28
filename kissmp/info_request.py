@@ -7,9 +7,9 @@ from kissmp.wallet_rpc import get_network
 from kissmp.kissmp_drivers import (
     create_review_puzzle,
 )
+from kissmp.amounts import TRILLION
 
 
-#API_ENDPOINT= "https://localhost:8484/"
 API_ENDPOINT= "https://api.kissmy.parts:8484/"
 
 def analyze_response(
@@ -21,8 +21,6 @@ def analyze_response(
 
     if verbosity:
         print(f"response: {json.dumps(data, indent=4)}")
-        #print(f"response: {data}")
-        #print(f"response: {data['c_ph']}")
     if data['m_created'] == 0:
         print(f"payment from buyer not yet on chain.")
     elif data['m_spent'] == 0:
@@ -44,14 +42,14 @@ def show_payment_info(
 ):
     # amounts
     amount = {
-        'price': "%.12f XCH" % (file['price_kmojos'] * 1000 / 1000000000000),
-        'buyer_deposit': "%.12f XCH" % (file['price_kmojos'] * 250 / 1000000000000),
-        'buyer_deposit_plus_payment': "%.12f XCH" % (file['price_kmojos'] * 1250 / 1000000000000),
-        'buyer_deposit_plus_payment_plus_extra': "%.12f XCH" % (file['price_kmojos'] * 1300 / 1000000000000),
-        'seller_deposit': "%.12f XCH" % (file['price_kmojos'] * 300 / 1000000000000),
-        'seller_deposit_minus_penalty': "%.12f XCH" % (file['price_kmojos'] * 250 / 1000000000000),
-        'seller_deposit_plus_payment': "%.12f XCH" % (file['price_kmojos'] * 1300 / 1000000000000),
-        'full': "%.12f XCH" % (file['price_kmojos'] * 1550 / 1000000000000),
+        'price': "%.12f XCH" % (file['price_kmojos'] * 1000 / TRILLION),
+        'buyer_deposit': "%.12f XCH" % (file['price_kmojos'] * 250 / TRILLION),
+        'buyer_deposit_plus_payment': "%.12f XCH" % (file['price_kmojos'] * 1250 / TRILLION),
+        'buyer_deposit_plus_payment_plus_extra': "%.12f XCH" % (file['price_kmojos'] * 1300 / TRILLION),
+        'seller_deposit': "%.12f XCH" % (file['price_kmojos'] * 300 / TRILLION),
+        'seller_deposit_minus_penalty': "%.12f XCH" % (file['price_kmojos'] * 250 / TRILLION),
+        'seller_deposit_plus_payment': "%.12f XCH" % (file['price_kmojos'] * 1300 / TRILLION),
+        'full': "%.12f XCH" % (file['price_kmojos'] * 1550 / TRILLION),
     }
     if verbosity:
         print(f"amounts: {json.dumps(amount, indent=4)}")
@@ -85,10 +83,8 @@ def show_review_info(cupkey: str, verbosity: bool):
     if verbosity:
         print(f"positive_puzzlehash: {positive_ph}")
         print(f"negative_puzzlehash: {negative_ph}")
-    #print(f"can take up to 10 seconds.")
     print(f"..")
     # request
-    #inputs = {"operation": "CREATE", "expireDate": expire_date}
     try:
         inputs = {}
         response1 = requests.get(API_ENDPOINT + "stars/" + positive_ph, json=inputs)
@@ -104,14 +100,12 @@ def show_review_info(cupkey: str, verbosity: bool):
     print(f"negative_stars: {negative_stars}")
     if   positive_stars == 0 and negative_stars == 0:
         #print(f"No trust in need, small price indeed.")
-        #print(f"No need for trust in here, just avoid big amounts.")
         print(f"We can be heroes.")
     elif positive_stars >  0 and negative_stars == 0:
         print(f"I've seen better.")
     elif positive_stars == 0 and negative_stars >  0:
         print(f"What can I say.")
     elif positive_stars == negative_stars:
-        #print(f"50/50, to do, or not to do.")
         print(f"Welcome to the jungle.")
     else:
         print("%.2f%% of a character, it seems." % (100 * negative_stars / (negative_stars + positive_stars)))
