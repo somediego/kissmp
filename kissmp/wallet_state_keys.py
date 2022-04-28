@@ -24,7 +24,6 @@ async def get_keys(private_key1: PrivateKey, puzzle_hash: bytes32, verbosity: bo
             .replace("KEY", db_path_key_suffix)
             .replace("v1", "v2")
         )
-        #mkdir(path.parent)
         db_path: Path = DEFAULT_ROOT_PATH / db_path_replaced
         if not db_path.exists():
             print(f"no database path.")
@@ -54,28 +53,3 @@ async def get_keys(private_key1: PrivateKey, puzzle_hash: bytes32, verbosity: bo
     finally:
         await db_connection.close()
 
-
-## from chia.wallet.wallet ##
-"""
-async def hack_populate_secret_key_for_puzzle_hash(
-    secret_key_store1: Any,  # Potentially awaitable class from secret_key_store (from chia.wallet.secret_key_store import SecretKeyStore)
-    private_key1: PrivateKey,
-    puzzle_hash: bytes32
-) -> G1Element:
-        maybe = await get_keys(private_key1, puzzle_hash)
-        if maybe is None:
-            error_msg = f"Wallet couldn't find keys for puzzle_hash {puzzle_hash}"
-            #log.error(error_msg)
-            raise ValueError(error_msg)
-
-        # Get puzzle for pubkey
-        public_key, secret_key = maybe
-
-        # HACK
-        synthetic_secret_key = calculate_synthetic_secret_key(secret_key, DEFAULT_HIDDEN_PUZZLE_HASH)
-        secret_key_store1.save_secret_key(synthetic_secret_key)
-
-        print(f"to_get_keys_sk_synthetic: {synthetic_secret_key}")
-        print(f"to_get_keys_pk_synthetic: {synthetic_secret_key.get_g1()}")
-        return public_key
-"""

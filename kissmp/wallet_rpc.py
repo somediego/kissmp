@@ -171,6 +171,4 @@ def get_genesis():
         config = load_config(DEFAULT_ROOT_PATH, "config.yaml")
         network = config["wallet"]["selected_network"]
         challenge = config["farmer"]["network_overrides"]["constants"][network]["GENESIS_CHALLENGE"]
-        #print(f"GENESIS_CHALLENGE: {challenge}")
-        #return hexstr_to_bytes("ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb")
         return hexstr_to_bytes(challenge)
