@@ -59,9 +59,6 @@ def attach_fee_spendbundle(
             get_signed_tx(fingerprint, attached_coin.puzzle_hash, amount_to_move, amount['fee'], tx_coin_announcements)
         )
         #print(f"\n##########\nsigned_tx: {signed_tx}\n##########\n")
-        # Aggregate everything together
-#        final_bundle = SpendBundle.aggregate([signed_tx.spend_bundle, spend_bundle])
-#        return final_bundle
         return signed_tx.spend_bundle
 
 
@@ -76,7 +73,6 @@ def get_kmp_coinspend(
 ) -> CoinSpend:
     # kmp spend
     kmp_puzzle = create_kissmp_puzzle(
-#        hexstr_to_bytes(file['buyer_cupkey']),
         buyer_synth_wallet_pk,
         seller_synth_wallet_pk,
         puzzle_for_synthetic_public_key(buyer_synth_wallet_pk).get_tree_hash(),  # buyer_ph,
@@ -158,8 +154,8 @@ def fund_kmp_spendbundle(
     kmp_puzzle = create_kissmp_puzzle(
         buyer_synth_wallet_pk,	# buyer's  synthetic wallet public key to use
         seller_synth_wallet_pk,	# seller's synthetic wallet public key to use
-        puzzle_for_synthetic_public_key(buyer_synth_wallet_pk).get_tree_hash(),	# buyer's  cashout puzzlehash
-        puzzle_for_synthetic_public_key(seller_synth_wallet_pk).get_tree_hash(),	# seller's cashout puzzlehash
+        puzzle_for_synthetic_public_key(buyer_synth_wallet_pk).get_tree_hash(),    # buyer's  cashout puzzlehash
+        puzzle_for_synthetic_public_key(seller_synth_wallet_pk).get_tree_hash(),   # seller's cashout puzzlehash
         amount['price_kmojos'],
     )
     # signed_tx
@@ -170,8 +166,7 @@ def fund_kmp_spendbundle(
     kmp_coin: Coin = list(
         filter(lambda c: c.puzzle_hash == kmp_puzzle.get_tree_hash(), signed_tx.spend_bundle.additions())
     )[0]
-    # Aggregate everything together
-#    final_bundle = SpendBundle.aggregate([signed_tx.spend_bundle])
+    # return bundle plus coin
     return [signed_tx.spend_bundle, kmp_coin]
 
 def contribution_spendbundle_for_seller_to_lock(
@@ -189,19 +184,13 @@ def contribution_spendbundle_for_seller_to_lock(
     number_of_selected_coins= len(signed_tx.spend_bundle.coin_spends)
     if verbosity:
         print(f"number_of_selected_coins == {number_of_selected_coins}")
-#        print(f"\n##########\nsigned_tx: {signed_tx}\n##########\n")
-#        print(f"tesing: {list(filter(lambda c: c.puzzle_hash != kmp_coinspend.coin.puzzle_hash, signed_tx.spend_bundle.additions()))[0].amount}")
-#        print(f"tesing: {list(filter(lambda c: c.puzzle_hash != kmp_coinspend.coin.puzzle_hash, signed_tx.spend_bundle.additions()))[1].amount}")
+        #print(f"\n##########\nsigned_tx: {signed_tx}\n##########\n")
 
     if number_of_selected_coins > 1:
         #############################################################
         # if more than one selected coin, combine coins into one single coin.
         #############################################################
         if len(signed_tx.spend_bundle.additions()) > 1:
-#            temp_coin = list(
-#                filter(lambda c: c.puzzle_hash != kmp_coinspend.coin.puzzle_hash, signed_tx.spend_bundle.additions())
-#            )[0]
-#            some_new_amount= amount['contribution'] + amount['fee'] + temp_coin.amount
             amount_left = list(filter(lambda c: c.puzzle_hash != kmp_coinspend.coin.puzzle_hash, signed_tx.spend_bundle.additions()))[0].amount
             some_new_amount= amount['contribution'] + amount['fee'] + amount_left
         else:
@@ -216,8 +205,8 @@ def contribution_spendbundle_for_seller_to_lock(
         combined_signed_tx = asyncio.get_event_loop().run_until_complete(
             get_signed_tx(pk1.get_fingerprint(), some_puzzle_hash, some_new_amount, some_fee, tx_coin_announcements)
         )
-#        if verbosity:
-#            print(f"\n##########\ncombined_signed_tx: {combined_signed_tx}\n##########\n")
+        #if verbosity:
+        #    print(f"\n##########\ncombined_signed_tx: {combined_signed_tx}\n##########\n")
 
         #############################################################
         # create contribution CoinSpend
