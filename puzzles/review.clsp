@@ -4,11 +4,15 @@
 		REVIEW_PUBKEY	;buyer/seller cupkey
 		my_amount		;in mojos
 	)
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;reviews are only valid if they have been spent
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 	(include condition_codes.clib)
 
 	;coffee's wallet treasury reserve puzzlehash
 	(defconstant TWATS_TREASURY_PUZZLEHASH 0x837add94046d2a16efafab120d0a62082f05b9fd791cae479adfe98e9a9ef49e)
+	;0.002 XCH
 	(defconstant STATIC_AMOUNT 2000000000)
 
 	;main
