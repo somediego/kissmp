@@ -56,7 +56,8 @@ kissmp
 
 How it works
 -------
-https://kissmy.parts/?page_id=2
+[introdution](https://kissmy.parts/?page_id=2)
+[deep dive](https://kissmy.parts/?page_id=110)
 
 
 Where to buy or sell
@@ -68,4 +69,4 @@ https://kissmy.parts
 
 Others
 -------
-Thanks to Quexington and Kronus91, I learnt most of the chia stuff reading through their opensource projects.
+Thanks to Quexington and Kronus91, I have learnt most of the chia stuff reading through their open code.
