@@ -7,17 +7,7 @@ Exchange anything. No middle man. No KYC. Open source.
 
 Built for [Chia](https://www.chia.net/) in [Chialisp](https://chialisp.com/).
 
-
-How it works
--------
-
-[Chia](https://www.chia.net/) created a new world thanks to [Offers](https://www.chia.net/offers/), this project try to focus on an off-chain side of the coin.
-
-Choose a seller, create a payment file, and exchange chia for any off-chain product or service.
-
-[Introdution](https://kissmy.parts/?page_id=2)
-
-[Deep dive FAQ](https://kissmy.parts/?page_id=110)
+[How it works](https://kiss.mp/)
 
 
 Install
@@ -68,13 +58,3 @@ kissmp
 ```
 
 
-Where to buy or sell
--------
-Anywhere or anybody that accepts XCH.
-You can start here:
-https://kissmy.parts
-
-
-Others
--------
-Thanks to Quexington and Kronus91, I have learnt most of the chia stuff reading through their open code.
