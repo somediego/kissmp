@@ -9,8 +9,11 @@ Exchange anything. No middle man. No KYC. Open source.
 
 Built for [Chia](https://www.chia.net/) in [Chialisp](https://chialisp.com/).
 
-[How it works](https://kiss.mp/)
+[How it works](https://github.com/sometwit/kissmp#how-it-works)
 
+[Get started](https://github.com/sometwit/kissmp/blob/main/GETSTARTED.md)
+
+[FAQ](https://github.com/sometwit/kissmp/blob/main/FAQ.md)
 
 Install
 -------
