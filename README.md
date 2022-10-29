@@ -3,6 +3,8 @@ Kiss My Parts
 
 Decentralized escrow. 
 
+Choose a seller, create a payment file, and exchange chia for any product or service.
+
 Exchange anything. No middle man. No KYC. Open source. 
 
 Built for [Chia](https://www.chia.net/) in [Chialisp](https://chialisp.com/).
@@ -56,5 +58,18 @@ kissmp
 ./venv/Scripts/activate
 kissmp
 ```
+
+
+How it works
+-------
+
+There are just one buyer and one seller, interacting with chia smart coins, no arbitrage or middle-man involved.
+
+Buyer will deposit 125% of price into a smart coin of his control, for a specific seller, and a payment file will be created to locate that coin. That could be recover by buyer at any time while seller has not locked that payment yet.
+
+Seller has power enough to lock buyer’s amount if he is willing to deposit on top 30% of price.
+Seller could decide to cancel after locked, buyer will have back 130% of the price. and seller 25% or price.
+
+Once Seller has locked the amount, trade off-chain can begin by seller. And trade will not be over until buyer confirm received. Once confirmed by buyer, seller will received his 30% deposit plus 100% payment, and buyer will have back his 25% deposit. 
 
 
