@@ -1,4 +1,4 @@
-Kiss My Parts
+Kiss MP
 =======
 
 Decentralized escrow. 
